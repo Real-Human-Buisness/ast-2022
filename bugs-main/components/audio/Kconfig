@@ -1,0 +1,31 @@
+menu "Audio Configuration"
+
+    config I2S_NUM
+        int "I2S Channel"
+        range 0 1
+        default 0
+        help
+            I2s Channel Number (0 or 1, methinks)
+
+	config I2S_BCK_IO
+		int "I2S BCLK Pin"
+		range 0 48
+		default 4
+		help
+			I2S BLCK Pin
+
+	config I2S_WS_IO
+		int "I2S WS Pin"
+		range 0 48
+		default 5
+		help
+			I2S Channel Select pin?
+
+	config I2S_DO_IO
+		int "I2S Data Out Pin"
+		range 0 48
+		default 18
+		help
+			Pretty sure this ones the data pin
+
+endmenu

@@ -1,0 +1,3 @@
+
+COMPONENT_ADD_INCLUDEDIRS = .
+COMPONENT_DEPENDS = touch spiffs lib8tion
