@@ -2,8 +2,8 @@
 
 #include <MD_YX5300.h>
 
-#define SERIAL_COUNT 3
-HardwareSerial *serials[3] = {&Serial1, &Serial3, &Serial5};
+#define SERIAL_COUNT 5
+HardwareSerial *serials[SERIAL_COUNT] = {&Serial1, &Serial3, &Serial5, &Serial2, &Serial7};
 MD_YX5300 *mp3s[SERIAL_COUNT];
 
 void cbResponse(const MD_YX5300::cbData *status)
@@ -83,9 +83,9 @@ bool is_playing = true;
 
 void loop() {
     // check_all();
-    if (millis() - last_stop_millis > 30000) {
+    if (millis() - last_stop_millis > 31800) {
         stop_all();
-        delay(200);
+        delay(100);
         start_all();
         is_playing = !is_playing;
         digitalWrite(13, !digitalRead(13));
