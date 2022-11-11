@@ -1,3 +1,3 @@
 
 COMPONENT_ADD_INCLUDEDIRS = .
-COMPONENT_DEPENDS = touch audio
+COMPONENT_DEPENDS = touch audio leds

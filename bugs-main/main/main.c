@@ -8,6 +8,7 @@
 
 #include "touch.h"
 #include "audio.h"
+#include "leds.h"
 
 static const char *TAG = "main";
 
@@ -19,6 +20,7 @@ void app_main(void)
 
     ESP_ERROR_CHECK(initialize_touch());
     ESP_ERROR_CHECK(initialize_audio());
+    ESP_ERROR_CHECK(initialize_leds());
     
     ESP_LOGI(TAG, "Program Initialized");
 

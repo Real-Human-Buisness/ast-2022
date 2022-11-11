@@ -12,7 +12,7 @@
 #include "driver/i2s.h"
 
 #define SAMPLE_RATE 22050
-#define FRAMES_PER_SAMPLE 64
+#define FRAMES_PER_SAMPLE 128
 #define AUDIO_STACK_SIZE 4096
 #define BUFFER_COUNT 6
 
