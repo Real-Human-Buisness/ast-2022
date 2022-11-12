@@ -91,6 +91,7 @@ class Button:
             self.last_color.off()
             if Ticker.millis - self.last_timestamp > 500:
                 self.select_state = SelectState.RAISE
+                self.last_timestamp = Ticker.millis
 
     def run_selected(self):
         time_run = Ticker.millis - self.last_timestamp
