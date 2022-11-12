@@ -15,6 +15,12 @@ class ButtonState(Enum):
     FADE_OUT = 6
 
 
+class SelectState(Enum):
+    HOLD_LOW = 1
+    RAISE = 2
+    LOWER = 3
+
+
 class Button:
 
     def __init__(self, position: int, start_pixel: int, end_pixel: int, color: RGB):
@@ -25,6 +31,7 @@ class Button:
         self.end = end_pixel
         self.color = color
         self.current_color = RGB(0, 0, 0)
+        self.select_state = SelectState.HOLD_LOW
         self.last_color = RGB(0, 0, 0)
         self.last_timestamp = 0
 
@@ -35,8 +42,13 @@ class Button:
 
     def transition_to_state(self, state: ButtonState):
         self.last_timestamp = Ticker.millis
-        self.last_color = self.current_color
+        self.last_color.copy(self.current_color)
         self.state = state
+        if state == ButtonState.SELECT_ME:
+            if self.last_color.R > 127 or self.last_color.G > 127 or self.last_color.B > 127:
+                self.select_state = SelectState.LOWER
+            else:
+                self.select_state = SelectState.RAISE
 
     def run_state(self):
         if self.state == ButtonState.OFF:
@@ -51,13 +63,45 @@ class Button:
             self.run_selected()
 
     def run_fade_out(self):
-        pass
+        if Ticker.millis - self.last_timestamp > 1000:
+            self.current_color.off()
+            self.transition_to_state(ButtonState.OFF)
+            return
+        self.current_color.fade_from(self.last_color, (Ticker.millis - self.last_timestamp) / 1000)
 
     def run_select_me(self):
-        pass
+        if self.select_state == SelectState.RAISE:
+            if Ticker.millis - self.last_timestamp > 1000:
+                self.current_color.copy(self.color)
+                self.last_color.copy(self.color)
+                self.select_state = SelectState.LOWER
+                self.last_timestamp = Ticker.millis
+            else:
+                self.current_color.fade_between(self.last_color, self.color, (Ticker.millis - self.last_timestamp) / 1000)
+        elif self.select_state == SelectState.LOWER:
+            if Ticker.millis - self.last_timestamp > 1000:
+                self.current_color.off()
+                self.last_color.off()
+                self.select_state = SelectState.HOLD_LOW
+                self.last_timestamp = Ticker.millis
+            else:
+                self.current_color.fade_from(self.last_color, (Ticker.millis - self.last_timestamp) / 1000)
+        else:
+            self.current_color.off()
+            self.last_color.off()
+            if Ticker.millis - self.last_timestamp > 500:
+                self.select_state = SelectState.RAISE
 
     def run_selected(self):
-        pass
+        time_run = Ticker.millis - self.last_timestamp
+        if time_run > 1800:
+            self.current_color.copy(self.color)
+            self.transition_to_state(ButtonState.SOLID)
+        selected_state = int(time_run / 300)
+        if selected_state % 2 == 0:
+            self.current_color.copy(self.color)
+        else:
+            self.current_color.off()
 
 
 class Buttons:
