@@ -36,8 +36,7 @@ class Cans:
     def transition_to_state(cls, state: CanState):
         cls.last_timestamp = Ticker.millis
         cls.state = state
-        if state == CanState.WOOSH:
-            print("WHOOSHING")
+        print(state)
 
     @classmethod
     def write_all(cls, color: RGB):
