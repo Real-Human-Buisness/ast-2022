@@ -39,20 +39,17 @@ class Cans:
     @classmethod
     def write_all(cls, color: RGB):
         for i in range(4):
-            Dmx.set_channel(i * 8, 255)
-            Dmx.set_channel(i * 8 + 1, color.R)
-            Dmx.set_channel(i * 8 + 2, color.G)
-            Dmx.set_channel(i * 8 + 3, color.B)
-            Dmx.set_channel(i * 8 + 7, 0)
+            Dmx.set_channel(i * 8, color.R)
+            Dmx.set_channel(i * 8 + 1, color.G)
+            Dmx.set_channel(i * 8 + 2, color.B)
 
     @classmethod
     def write_woosh(cls, position: int):
         color = COLORS[cls.woosh_position]
-        Dmx.set_channel(position * 8, 255)
-        Dmx.set_channel(position * 8 + 1, color.R)
-        Dmx.set_channel(position * 8 + 2, color.G)
-        Dmx.set_channel(position * 8 + 3, color.B)
-        Dmx.set_channel(position * 8 + 7, 0)
+        Dmx.set_channel(position * 8, color.R)
+        Dmx.set_channel(position * 8 + 1, color.G)
+        Dmx.set_channel(position * 8 + 2, color.B)
+        # Dmx.set_channel(position * 8 + 7, 0)
 
     @classmethod
     def update(cls):
@@ -71,11 +68,10 @@ class Cans:
         color = COLORS[cls.woosh_position]
         cls.current_color.off()
         cls.write_all(cls.current_color)
-        Dmx.set_channel(3 * 8, 255)
-        Dmx.set_channel(3 * 8 + 1, color.R)
-        Dmx.set_channel(3 * 8 + 2, color.G)
-        Dmx.set_channel(3 * 8 + 3, color.B)
-        Dmx.set_channel(3 * 8 + 7, 127)
+        Dmx.set_channel(3 * 8, color.R)
+        Dmx.set_channel(3 * 8 + 1, color.G)
+        Dmx.set_channel(3 * 8 + 2, color.B)
+        # Dmx.set_channel(3 * 8 + 7, 127)
 
     @classmethod
     def run_woosh(cls):
