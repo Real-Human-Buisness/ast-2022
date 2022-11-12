@@ -105,11 +105,13 @@ class WooshingState:
 
     @classmethod
     def enter(cls, millis: int):
+        print(millis, "starting woosh")
         cls.enter_time = millis
 
     @classmethod
     def run(cls, millis: int) -> Optional[DeconState]:
         if millis - cls.enter_time > 8000:
+            print(millis, cls.enter_time, "exiting woosh")
             return DeconState.BOOSHING
 
     @classmethod
