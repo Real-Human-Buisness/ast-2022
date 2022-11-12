@@ -46,6 +46,15 @@ class Cans:
             Dmx.set_channel(i * 8 + 7, 0)
 
     @classmethod
+    def write_woosh(cls, position: int):
+        color = COLORS[cls.woosh_position]
+        Dmx.set_channel(position * 8, 255)
+        Dmx.set_channel(position * 8 + 1, color.R)
+        Dmx.set_channel(position * 8 + 2, color.G)
+        Dmx.set_channel(position * 8 + 3, color.B)
+        Dmx.set_channel(position * 8 + 7, 0)
+
+    @classmethod
     def update(cls):
         if cls.state == CanState.ON:
             cls.write_all(cls.base_color)
@@ -70,7 +79,20 @@ class Cans:
 
     @classmethod
     def run_woosh(cls):
-        color = COLORS[cls.woosh_position]
-        print(color.R, color.G, color.B)
-        cls.write_all(color)
+        cls.current_color.off()
+        cls.write_all(cls.current_color)
+        diff = Ticker.millis - cls.last_timestamp
+        if diff < 1600:
+            cls.write_woosh(int(diff / 400))
+        elif diff < 3600:
+            diff -= 1600
+            cls.write_woosh(int(diff / 250) % 4)
+        elif diff < 5200:
+            diff -= 3600
+            cls.write_woosh(int(diff / 200) % 4)
+        else:
+            diff -= 5200
+            cls.write_woosh(int(diff / 175) % 4)
+
+
 

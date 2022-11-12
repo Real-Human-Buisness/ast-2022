@@ -120,7 +120,7 @@ class WooshingState:
 
     @classmethod
     def run(cls, millis: int) -> Optional[DeconState]:
-        if millis - cls.enter_time > 8000:
+        if millis - cls.enter_time > 7300:
             print(millis, cls.enter_time, "exiting woosh")
             return DeconState.BOOSHING
         return None
@@ -142,7 +142,7 @@ class BooshingState:
 
     @classmethod
     def run(cls, millis: int) -> Optional[DeconState]:
-        if millis - cls.enter_time > 4000:
+        if millis - cls.enter_time > 3000:
             return DeconState.EXITING
         return None
 
