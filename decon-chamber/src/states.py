@@ -51,9 +51,18 @@ class PlayingState:
     @classmethod
     def run(cls, millis: int) -> Optional[DeconState]:
         Video.update()
-        # after n seconds, turn each button to solid
-        # afterwards, transition to selecting while video is still rolling
-        return None
+        if not Video.is_playing():
+            return DeconState.SELECTING
+        if millis - cls.enter_time > 34500:
+            Buttons.set_state(0, ButtonState.SOLID)
+        if millis - cls.enter_time > 37000:
+            Buttons.set_state(1, ButtonState.SOLID)
+        if millis - cls.enter_time > 38000:
+            Buttons.set_state(2, ButtonState.SOLID)
+        if millis - cls.enter_time > 40000:
+            Buttons.set_state(3, ButtonState.SOLID)
+        if millis - cls.enter_time > 45000:
+            return DeconState.SELECTING
 
     @classmethod
     def exit(cls):
