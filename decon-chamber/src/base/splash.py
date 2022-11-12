@@ -20,6 +20,7 @@ class Splash:
             cmd = ['fbi', '-d', '/dev/fb0', '--noverbose', '-a', asset_path]
         else:
             cmd = ['fbi', '-T', '1', '-d', '/dev/fb0', '--noverbose', '-a', asset_path]
+        print(cmd)
         cls.proc = Popen(cmd, stdin=PIPE)
 
     @classmethod
