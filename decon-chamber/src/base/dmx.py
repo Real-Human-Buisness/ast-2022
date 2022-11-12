@@ -6,6 +6,9 @@ from typing import List, Optional
 
 from DMXEnttecPro import Controller
 
+ADDR_BOOSH = 34
+ADDR_PROJECTOR = 35
+
 
 class Dmx:
 

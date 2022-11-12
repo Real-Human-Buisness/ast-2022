@@ -1,7 +1,7 @@
 from enum import Enum
 from typing import Optional
 
-from src.base.dmx import Dmx
+from src.base.dmx import Dmx, ADDR_PROJECTOR, ADDR_BOOSH
 from src.state.button import ButtonState, Buttons
 from src.state.video import Video
 
@@ -45,7 +45,7 @@ class PlayingState:
     def enter(cls, millis: int):
         Video.start_video()
         # starts projector
-        Dmx.dmx.set_channel(66, 255)
+        Dmx.dmx.set_channel(ADDR_PROJECTOR, 255)
         cls.enter_time = millis
 
     @classmethod
@@ -80,7 +80,7 @@ class SelectingState:
     def exit(cls):
         # just in case, stop video and projector
         Video.stop_video()
-        Dmx.dmx.set_channel(66, 0)
+        Dmx.dmx.set_channel(ADDR_PROJECTOR, 0)
 
 
 class WooshingState:
@@ -115,7 +115,7 @@ class BooshingState:
     @classmethod
     def exit(cls):
         # stop the boosh
-        Dmx.dmx.set_channel(65, 0)
+        Dmx.dmx.set_channel(ADDR_BOOSH, 0)
 
 
 class ExitingState:
