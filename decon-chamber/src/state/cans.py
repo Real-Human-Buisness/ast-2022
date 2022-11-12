@@ -30,13 +30,11 @@ class Cans:
     @classmethod
     def set_woosh(cls, position: int):
         Cans.woosh_position = position
-        print("BEE WOSH DAMMIT", position)
 
     @classmethod
     def transition_to_state(cls, state: CanState):
         cls.last_timestamp = Ticker.millis
         cls.state = state
-        print(state)
 
     @classmethod
     def write_all(cls, color: RGB):
@@ -45,6 +43,7 @@ class Cans:
             Dmx.set_channel(i * 8 + 1, color.R)
             Dmx.set_channel(i * 8 + 2, color.G)
             Dmx.set_channel(i * 8 + 3, color.B)
+            Dmx.set_channel(i * 8 + 7, 0)
 
     @classmethod
     def update(cls):
