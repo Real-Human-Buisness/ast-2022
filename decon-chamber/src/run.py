@@ -42,7 +42,7 @@ class Decon:
     def transition_state(cls, new_state: DeconState):
         STATE_DICT[cls.state].exit()
         cls.state = new_state
-        STATE_DICT[cls.state].enter()
+        STATE_DICT[cls.state].enter(Ticker.millis)
 
     @classmethod
     def update_outputs(cls):
