@@ -6,6 +6,7 @@ from src.base.splash import Splash
 from src.base.ticker import Ticker
 from src.base.touch import Touch
 from src.state.button import Buttons
+from src.state.resetter import Resetter
 from src.state.video import Video
 from src.states import DeconState, STATE_DICT
 
@@ -29,6 +30,7 @@ class Decon:
         Touch.update()
         Ticker.update()
         Buttons.update()
+        Resetter.update()
 
     @classmethod
     def run(cls):
