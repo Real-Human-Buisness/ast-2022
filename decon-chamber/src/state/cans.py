@@ -71,5 +71,6 @@ class Cans:
     @classmethod
     def run_woosh(cls):
         color = COLORS[cls.woosh_position]
+        print(color.R, color.G, color.B)
         cls.write_all(color)
 
