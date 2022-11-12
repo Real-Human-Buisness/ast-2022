@@ -37,6 +37,8 @@ class Button:
 
     def update(self):
         self.is_touched = Touch.is_touched[self.position]
+        if self.is_touched:
+            print("touched {0}".format(self.position))
         self.run_state()
         Leds.set_group_color(self.start, self.end, self.current_color)
 
