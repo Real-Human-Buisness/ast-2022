@@ -54,3 +54,4 @@ class Decon:
         Dmx.teardown()
         Leds.teardown()
         Splash.teardown()
+        Video.stop_video()
