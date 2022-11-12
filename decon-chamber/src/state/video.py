@@ -18,7 +18,7 @@ class Video:
     def start_video(cls):
         asset_path = os.path.join(os.path.dirname(__file__), '..', '..', 'assets', 'decon_video.mp4')
         cls.video_p = Popen(
-            ['sudo', 'cvlc', '--no-osd', '--no-repeat', '--play-and-exit', '-f', asset_path],
+            ['cvlc', '--no-osd', '--no-repeat', '--play-and-exit', '-f', asset_path],
             stdout=PIPE, preexec_fn=os.setsid
         )
         Dmx.set_channel(ADDR_PROJECTOR, 255)
