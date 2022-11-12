@@ -32,6 +32,7 @@ class WaitingState:
     def run(cls, millis: int) -> Optional[DeconState]:
         if Buttons.get_main_push():
             return DeconState.PLAYING
+        return None
 
     @classmethod
     def exit(cls):
@@ -68,6 +69,7 @@ class PlayingState:
             Buttons.set_state(3, ButtonState.SOLID)
         if millis - cls.enter_time > 43000:
             return DeconState.SELECTING
+        return None
 
     @classmethod
     def exit(cls):
@@ -97,6 +99,7 @@ class SelectingState:
             Cans.set_woosh(selected_button)
             Cans.transition_to_state(CanState.WOOSH)
             return DeconState.WOOSHING
+        return None
 
     @classmethod
     def exit(cls):
@@ -120,6 +123,7 @@ class WooshingState:
         if millis - cls.enter_time > 8000:
             print(millis, cls.enter_time, "exiting woosh")
             return DeconState.BOOSHING
+        return None
 
     @classmethod
     def exit(cls):
@@ -140,6 +144,7 @@ class BooshingState:
     def run(cls, millis: int) -> Optional[DeconState]:
         if millis - cls.enter_time > 4000:
             return DeconState.EXITING
+        return None
 
     @classmethod
     def exit(cls):
@@ -162,6 +167,7 @@ class ExitingState:
     def run(cls, millis: int) -> Optional[DeconState]:
         if millis - cls.enter_time > 3000:
             return DeconState.WAITING
+        return None
 
     @classmethod
     def exit(cls):
