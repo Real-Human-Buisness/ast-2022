@@ -29,9 +29,10 @@ class Cans:
 
     @classmethod
     def set_woosh(cls, position: int):
-        cls.woosh_position = position
-        cls.last_timestamp = Ticker.millis
-        cls.state = CanState.WOOSH
+        Cans.woosh_position = position
+        Cans.last_timestamp = Ticker.millis
+        Cans.state = CanState.WOOSH
+        print("BEE WOSH DAMMIT", position)
 
     @classmethod
     def transition_to_state(cls, state: CanState):
