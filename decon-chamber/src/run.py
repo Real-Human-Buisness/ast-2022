@@ -36,16 +36,16 @@ class Decon:
     @classmethod
     def run(cls):
         cls.update_inputs()
-        next_state = STATE_DICT[cls.state].run(Ticker.millis)
+        next_state = STATE_DICT[cls.state.value].run(Ticker.millis)
         if next_state is not None:
             cls.transition_state(next_state)
         cls.update_outputs()
 
     @classmethod
     def transition_state(cls, new_state: DeconState):
-        STATE_DICT[cls.state].exit()
+        STATE_DICT[cls.state.value].exit()
         cls.state = new_state
-        STATE_DICT[cls.state].enter(Ticker.millis)
+        STATE_DICT[cls.state.value].enter(Ticker.millis)
 
     @classmethod
     def update_outputs(cls):

@@ -22,6 +22,7 @@ class WaitingState:
 
     @classmethod
     def enter(cls, millis: int):
+        print("waiting, enter")
         Cans.transition_to_state(CanState.ON)
         Buttons.set_state_numbered(ButtonState.OFF)
         Buttons.set_state(4, ButtonState.SELECT_ME)
@@ -34,6 +35,7 @@ class WaitingState:
 
     @classmethod
     def exit(cls):
+        print("waiting, leave")
         # show we pushed the main button
         Buttons.set_state(4, ButtonState.SELECTED)
 
@@ -44,6 +46,7 @@ class PlayingState:
 
     @classmethod
     def enter(cls, millis: int):
+        print("playing, enter")
         Video.start_video()
         Cans.transition_to_state(CanState.OFF)
         cls.enter_time = millis
@@ -68,6 +71,7 @@ class PlayingState:
 
     @classmethod
     def exit(cls):
+        print("playing, leave")
         pass
 
 
@@ -77,6 +81,7 @@ class SelectingState:
 
     @classmethod
     def enter(cls, millis: int):
+        print("selecting, enter")
         Buttons.set_state_numbered(ButtonState.SELECT_ME)
         cls.enter_time = millis
 
@@ -95,6 +100,7 @@ class SelectingState:
 
     @classmethod
     def exit(cls):
+        print("selecting, leave")
         # just in case, stop video and projector
         Video.stop_video()
         Buttons.set_state(4, ButtonState.FADE_OUT)
@@ -106,7 +112,7 @@ class WooshingState:
 
     @classmethod
     def enter(cls, millis: int):
-        print(millis, "starting woosh")
+        print("wooshing, enter")
         cls.enter_time = millis
 
     @classmethod
@@ -117,7 +123,7 @@ class WooshingState:
 
     @classmethod
     def exit(cls):
-        pass
+        print("wooshing, leave")
 
 
 class BooshingState:
@@ -126,17 +132,18 @@ class BooshingState:
 
     @classmethod
     def enter(cls, millis: int):
+        print("booshing, enter")
         Cans.transition_to_state(CanState.BOOSH)
         cls.enter_time = millis
 
     @classmethod
     def run(cls, millis: int) -> Optional[DeconState]:
         if millis - cls.enter_time > 4000:
-            return DeconState.BOOSHING
+            return DeconState.EXITING
 
     @classmethod
     def exit(cls):
-        # stop the boosh
+        print("booshing, leave")
         Dmx.dmx.set_channel(ADDR_BOOSH, 0)
         Cans.transition_to_state(CanState.OFF)
 
@@ -147,6 +154,7 @@ class ExitingState:
 
     @classmethod
     def enter(cls, millis: int):
+        print("exiting, enter")
         Buttons.set_state_numbered(ButtonState.OFF)
         cls.enter_time = millis
 
@@ -157,14 +165,15 @@ class ExitingState:
 
     @classmethod
     def exit(cls):
+        print("exiting, leave")
         Cans.transition_to_state(CanState.ON)
 
 
 STATE_DICT = {
-    DeconState.WAITING: WaitingState,
-    DeconState.PLAYING: PlayingState,
-    DeconState.SELECTING: SelectingState,
-    DeconState.WOOSHING: WooshingState,
-    DeconState.BOOSHING: BooshingState,
-    DeconState.EXITING: ExitingState,
+    DeconState.WAITING.value: WaitingState,
+    DeconState.PLAYING.value: PlayingState,
+    DeconState.SELECTING.value: SelectingState,
+    DeconState.WOOSHING.value: WooshingState,
+    DeconState.BOOSHING.value: BooshingState,
+    DeconState.EXITING.value: ExitingState,
 }
