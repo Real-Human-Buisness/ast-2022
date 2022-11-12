@@ -90,6 +90,7 @@ class SelectingState:
         if selected_button != -1:
             Buttons.select_numbered_button(selected_button)
             Cans.set_woosh(selected_button)
+            Cans.transition_to_state(CanState.WOOSH)
             return DeconState.WOOSHING
 
     @classmethod
