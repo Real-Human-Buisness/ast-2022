@@ -31,6 +31,8 @@ class Cans:
     def set_woosh(cls, position: int):
         cls.woosh_position = position
         cls.transition_to_state(CanState.WOOSH)
+        print("should be woosh")
+        print(cls.state)
 
     @classmethod
     def transition_to_state(cls, state: CanState):
