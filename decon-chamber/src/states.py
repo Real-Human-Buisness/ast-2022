@@ -53,15 +53,15 @@ class PlayingState:
         Video.update()
         if not Video.is_playing():
             return DeconState.SELECTING
-        if millis - cls.enter_time > 34500:
-            Buttons.set_state(0, ButtonState.SOLID)
-        if millis - cls.enter_time > 37000:
-            Buttons.set_state(1, ButtonState.SOLID)
-        if millis - cls.enter_time > 38000:
-            Buttons.set_state(2, ButtonState.SOLID)
         if millis - cls.enter_time > 40000:
-            Buttons.set_state(3, ButtonState.SOLID)
+            Buttons.set_state(0, ButtonState.SOLID)
+        if millis - cls.enter_time > 42000:
+            Buttons.set_state(1, ButtonState.SOLID)
+        if millis - cls.enter_time > 43000:
+            Buttons.set_state(2, ButtonState.SOLID)
         if millis - cls.enter_time > 45000:
+            Buttons.set_state(3, ButtonState.SOLID)
+        if millis - cls.enter_time > 50000:
             return DeconState.SELECTING
 
     @classmethod

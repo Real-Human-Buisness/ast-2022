@@ -18,7 +18,7 @@ class RGB:
 
     # our lights are bgr...
     def get_int_color(self) -> int:
-        return (self.B << 16) | (self.G << 8) | self.R
+        return (self.G << 16) | (self.B << 8) | self.R
 
     def off(self):
         self.R = 0
