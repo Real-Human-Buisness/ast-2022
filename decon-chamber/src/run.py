@@ -23,7 +23,7 @@ class Decon:
         Touch.setup()
         Ticker.setup()
         Buttons.setup()
-        STATE_DICT[cls.state].enter(Ticker.millis)
+        STATE_DICT[cls.state.value].enter(Ticker.millis)
 
     @classmethod
     def update_inputs(cls):
