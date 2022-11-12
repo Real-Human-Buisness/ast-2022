@@ -160,7 +160,7 @@ class BooshingState:
     @classmethod
     def exit(cls):
         print("booshing, leave")
-        Dmx.dmx.set_channel(ADDR_BOOSH, 0)
+        Dmx.set_channel(ADDR_BOOSH, 0)
         Cans.transition_to_state(CanState.OFF)
 
 
