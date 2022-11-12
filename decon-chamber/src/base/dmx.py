@@ -18,6 +18,7 @@ class Dmx:
     def setup(cls):
         try:
             cls.dmx = Controller('/dev/ttyUSB0')
+            cls.dmx.clear_channels()
         except Exception as e:
             print(e)
             print("failed to start dmx controller")

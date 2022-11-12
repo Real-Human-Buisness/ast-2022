@@ -7,7 +7,7 @@ from typing import Optional
 
 import psutil
 
-from src.base.dmx import Dmx
+from src.base.dmx import Dmx, ADDR_PROJECTOR
 
 
 class Video:
@@ -21,6 +21,7 @@ class Video:
             ['sudo', 'cvlc', '--no-osd', '--no-repeat', '--play-and-exit', '-f', asset_path],
             stdout=PIPE, preexec_fn=os.setsid
         )
+        Dmx.set_channel(ADDR_PROJECTOR, 255)
 
     @classmethod
     def update(cls):
@@ -29,7 +30,7 @@ class Video:
                 # video is stopped
                 cls.video_p = None
                 # stop projector
-                Dmx.set_channel(65, 255)
+                Dmx.set_channel(ADDR_PROJECTOR, 0)
 
     @classmethod
     def is_playing(cls):
