@@ -107,17 +107,16 @@ class BooshingState:
 
     @classmethod
     def enter(cls, millis: int):
-        Boosher.start_booshing()
         cls.enter_time = millis
 
     @classmethod
     def run(cls, millis: int) -> Optional[DeconState]:
-        Boosher.update()
         return None
 
     @classmethod
     def exit(cls):
-        Boosher.stop_booshing()
+        # stop the boosh
+        Dmx.dmx.set_channel(64, 0)
 
 
 class ExitingState:

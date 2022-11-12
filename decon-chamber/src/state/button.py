@@ -66,12 +66,12 @@ class Buttons:
 
     @classmethod
     def setup(cls):
-        cls.main_button = Button(4, 19, 21, RGB(255, 197, 143))
+        cls.main_button = Button(4, 17, 19, RGB(255, 197, 143))
         cls.numbered_buttons = [
-            Button(0, 1, 3, RGB(255, 0, 0)),
-            Button(1, 5, 7, RGB(255, 255, 0)),
-            Button(2, 9, 11, RGB(0, 255, 0)),
-            Button(3, 13, 15, RGB(0, 0, 255)),
+            Button(0, 0, 2, RGB(255, 0, 0)),
+            Button(1, 4, 6, RGB(255, 255, 0)),
+            Button(2, 8, 10, RGB(0, 255, 0)),
+            Button(3, 12, 14, RGB(0, 0, 255)),
         ]
 
     @classmethod
