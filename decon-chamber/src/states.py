@@ -46,7 +46,7 @@ class PlayingState:
     def enter(cls, millis: int):
         Video.start_video()
         # starts projector
-        Dmx.dmx.set_channel(ADDR_PROJECTOR, 255)
+        Dmx.set_channel(ADDR_PROJECTOR, 255)
         Cans.transition_to_state(CanState.OFF)
         cls.enter_time = millis
 
@@ -54,7 +54,7 @@ class PlayingState:
     def run(cls, millis: int) -> Optional[DeconState]:
         Video.update()
         if not Video.is_playing():
-            Dmx.dmx.set_channel(ADDR_PROJECTOR, 0)
+            Dmx.set_channel(ADDR_PROJECTOR, 0)
             Buttons.set_state(4, ButtonState.FADE_OUT)
             return DeconState.SELECTING
         if millis - cls.enter_time > 36000:

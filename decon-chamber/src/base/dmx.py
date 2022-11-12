@@ -24,6 +24,10 @@ class Dmx:
             sys.exit(1)
 
     @classmethod
+    def set_channel(cls, p: int, v: int):
+        cls.dmx.set_channel(p + 1, v)
+
+    @classmethod
     def update(cls):
         cls.dmx.submit()
 

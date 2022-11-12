@@ -29,7 +29,7 @@ class Video:
                 # video is stopped
                 cls.video_p = None
                 # stop projector
-                Dmx.dmx.set_channel(65, 255)
+                Dmx.set_channel(65, 255)
 
     @classmethod
     def is_playing(cls):
