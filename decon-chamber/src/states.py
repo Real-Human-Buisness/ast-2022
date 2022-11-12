@@ -2,7 +2,6 @@ from enum import Enum
 from typing import Optional
 
 from src.base.dmx import Dmx
-from src.state.boosher import Boosher
 from src.state.button import ButtonState, Buttons
 from src.state.video import Video
 
