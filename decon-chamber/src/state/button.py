@@ -95,10 +95,10 @@ class Button:
 
     def run_selected(self):
         time_run = Ticker.millis - self.last_timestamp
-        if time_run > 1800:
+        if time_run > 1200:
             self.current_color.copy(self.color)
             self.transition_to_state(ButtonState.SOLID)
-        selected_state = int(time_run / 300)
+        selected_state = int(time_run / 200)
         if selected_state % 2 == 0:
             self.current_color.copy(self.color)
         else:

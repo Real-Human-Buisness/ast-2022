@@ -13,6 +13,7 @@ class Resetter:
     def update(cls):
         if Touch.is_touched == (True, True, True, True, False):
             if not cls.is_armed:
+                print("armed")
                 cls.is_armed = True
                 cls.armed_at = Ticker.millis
             else:
