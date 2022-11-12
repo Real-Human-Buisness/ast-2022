@@ -1,5 +1,4 @@
 
-from enum import Enum
 from src.base.dmx import Dmx
 from src.base.leds import Leds
 from src.base.splash import Splash

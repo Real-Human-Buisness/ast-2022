@@ -17,6 +17,6 @@ class Resetter:
                 cls.armed_at = Ticker.millis
             else:
                 if Ticker.millis - cls.armed_at > 5000:
-                    os.system('reboot now')
+                    os.system('sudo reboot now')
         else:
             cls.is_armed = False
