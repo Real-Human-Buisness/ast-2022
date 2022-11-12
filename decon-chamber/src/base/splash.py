@@ -16,10 +16,16 @@ class Splash:
         os.system('clear')
         os.system('tput civis')
         asset_path = os.path.join(os.path.dirname(__file__), '..', '..', 'assets', 'black_background.jpg')
-        cls.proc = Popen(
-            ['fbi', '-T', '1', '-d', '/dev/fb0', '--noverbose', '-a', asset_path],
-            stdin=PIPE
-        )
+        if os.environ['IS_LOCAL']:
+            cls.proc = Popen(
+                ['fbi', '--noverbose', '-a', asset_path],
+                stdin=PIPE
+            )
+        else:
+            cls.proc = Popen(
+                ['fbi', '-T', '1', '-d', '/dev/fb0', '--noverbose', '-a', asset_path],
+                stdin=PIPE
+            )
 
     @classmethod
     def teardown(cls):
