@@ -71,7 +71,7 @@ class Button:
 
     def run_select_me(self):
         if self.select_state == SelectState.RAISE:
-            if Ticker.millis - self.last_timestamp > 1000:
+            if Ticker.millis - self.last_timestamp > 2000:
                 self.current_color.copy(self.color)
                 self.last_color.copy(self.color)
                 self.select_state = SelectState.LOWER
@@ -79,7 +79,7 @@ class Button:
             else:
                 self.current_color.fade_between(self.last_color, self.color, (Ticker.millis - self.last_timestamp) / 1000)
         elif self.select_state == SelectState.LOWER:
-            if Ticker.millis - self.last_timestamp > 1000:
+            if Ticker.millis - self.last_timestamp > 2000:
                 self.current_color.off()
                 self.last_color.off()
                 self.select_state = SelectState.HOLD_LOW
