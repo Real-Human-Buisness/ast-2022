@@ -7,7 +7,7 @@ from src.types_ import RGB
 
 class CanState(Enum):
     ON = 1
-    OFF = 3
+    OFF = 2
     WOOSH = 3
     BOOSH = 4
 
