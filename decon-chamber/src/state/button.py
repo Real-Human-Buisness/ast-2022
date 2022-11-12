@@ -77,7 +77,7 @@ class Button:
                 self.select_state = SelectState.LOWER
                 self.last_timestamp = Ticker.millis
             else:
-                self.current_color.fade_between(self.last_color, self.color, (Ticker.millis - self.last_timestamp) / 1000)
+                self.current_color.fade_between(self.last_color, self.color, (Ticker.millis - self.last_timestamp) / 2000)
         elif self.select_state == SelectState.LOWER:
             if Ticker.millis - self.last_timestamp > 2000:
                 self.current_color.off()
@@ -85,7 +85,7 @@ class Button:
                 self.select_state = SelectState.HOLD_LOW
                 self.last_timestamp = Ticker.millis
             else:
-                self.current_color.fade_from(self.last_color, (Ticker.millis - self.last_timestamp) / 1000)
+                self.current_color.fade_from(self.last_color, (Ticker.millis - self.last_timestamp) / 2000)
         else:
             self.current_color.off()
             self.last_color.off()
