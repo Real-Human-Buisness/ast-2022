@@ -143,15 +143,15 @@ class BooshingState:
     @classmethod
     def run(cls, millis: int) -> Optional[DeconState]:
         diff = millis - cls.enter_time
-        if millis - cls.enter_time > 2750:
+        if millis - cls.enter_time > 5000:
             return DeconState.EXITING
-        if diff < 100:
+        if diff < 500:
             Dmx.set_channel(ADDR_BOOSH, 255)
-        elif diff < 500:
+        elif diff < 1000:
             Dmx.set_channel(ADDR_BOOSH, 0)
-        elif diff < 700:
-            Dmx.set_channel(ADDR_BOOSH, 255)
         elif diff < 1500:
+            Dmx.set_channel(ADDR_BOOSH, 255)
+        elif diff < 2000:
             Dmx.set_channel(ADDR_BOOSH, 0)
         else:
             Dmx.set_channel(ADDR_BOOSH, 255)
