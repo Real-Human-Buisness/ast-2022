@@ -18,7 +18,7 @@ class Splash:
         asset_path = os.path.join(os.path.dirname(__file__), '..', '..', 'assets', 'black_background.jpg')
         if os.environ['IS_LOCAL']:
             cls.proc = Popen(
-                ['fbi', '--noverbose', '-a', asset_path],
+                ['fbi', '-d', '/dev/fb0', '--noverbose', '-a', asset_path],
                 stdin=PIPE
             )
         else:
