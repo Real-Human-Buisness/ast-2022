@@ -21,6 +21,7 @@ class Decon:
         Leds.setup()
         Touch.setup()
         Ticker.setup()
+        Buttons.setup()
         STATE_DICT[cls.state].enter(Ticker.millis)
 
     @classmethod

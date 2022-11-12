@@ -62,7 +62,7 @@ class Button:
 
 class Buttons:
     main_button: Button
-    numbered_buttons: List[Button]
+    numbered_buttons: List[Button] = []
 
     @classmethod
     def setup(cls):
