@@ -16,11 +16,7 @@ class Splash:
         os.system('clear')
         os.system('tput civis')
         asset_path = os.path.join(os.path.dirname(__file__), '..', '..', 'assets', 'black_background.jpg')
-        if os.environ['IS_LOCAL']:
-            cmd = ['fbi', '-d', '/dev/fb0', '--noverbose', '-a', asset_path]
-        else:
-            cmd = ['fbi', '-T', '1', '-d', '/dev/fb0', '--noverbose', '-a', asset_path]
-        print(cmd)
+        cmd = ['sudo', 'fbi', '-T', '1', '-d', '/dev/fb0', '--noverbose', '-a', asset_path]
         cls.proc = Popen(cmd, stdin=PIPE)
 
     @classmethod
