@@ -12,10 +12,6 @@ def signal_handler(sig, frame):
 
 
 def main():
-    if os.environ['IS_LOCAL']:
-        print("waiting ghettoly for fb")
-        time.sleep(10.0)
-        print("done waiting")
     Decon.setup()
     signal.signal(signal.SIGINT, signal_handler)
     while True:
