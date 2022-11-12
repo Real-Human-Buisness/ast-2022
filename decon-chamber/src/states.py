@@ -29,6 +29,7 @@ class WaitingState:
     @classmethod
     def run(cls, millis: int) -> Optional[DeconState]:
         if Buttons.get_main_push():
+            print("got here!")
             return DeconState.PLAYING
 
     @classmethod
