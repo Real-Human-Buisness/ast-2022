@@ -11,9 +11,10 @@ class DeconState(Enum):
     WAITING = 1
     PLAYING = 2
     SELECTING = 3
-    WOOSHING = 4
-    BOOSHING = 5
-    EXITING = 6
+    OUTRO = 4
+    WOOSHING = 5
+    BOOSHING = 6
+    EXITING = 7
 
 
 class WaitingState:
@@ -94,16 +95,37 @@ class SelectingState:
         if selected_button != -1:
             Buttons.select_numbered_button(selected_button)
             Cans.set_woosh(selected_button)
-            Cans.transition_to_state(CanState.WOOSH)
-            return DeconState.WOOSHING
+            if Video.is_playing():
+                return DeconState.OUTRO
+            else:
+                Cans.transition_to_state(CanState.WOOSH)
+                return DeconState.WOOSHING
         return None
 
     @classmethod
     def exit(cls):
         print("selecting, leave")
-        # just in case, stop video and projector
-        # Video.stop_video()
-        Buttons.set_state(4, ButtonState.FADE_OUT)
+
+
+class OutroState:
+
+    enter_time: int
+
+    @classmethod
+    def enter(cls, millis: int):
+        print("outro, enter")
+        cls.enter_time = millis
+
+    @classmethod
+    def run(cls, millis: int) -> Optional[DeconState]:
+        if not Video.is_playing():
+            return DeconState.WOOSHING
+        return None
+
+    @classmethod
+    def exit(cls):
+        print("outro, leave")
+        Cans.transition_to_state(CanState.WOOSH)
 
 
 class WooshingState:
@@ -187,6 +209,7 @@ STATE_DICT = {
     DeconState.WAITING.value: WaitingState,
     DeconState.PLAYING.value: PlayingState,
     DeconState.SELECTING.value: SelectingState,
+    DeconState.OUTRO.value: OutroState,
     DeconState.WOOSHING.value: WooshingState,
     DeconState.BOOSHING.value: BooshingState,
     DeconState.EXITING.value: ExitingState,
