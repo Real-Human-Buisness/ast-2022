@@ -24,14 +24,24 @@ LED_CHANNEL = 0  # set to '1' for GPIOs 13, 19, 41, 45 or 53
 def test_dmx():
     dmx = Controller('/dev/ttyUSB0')  # Typical of Linux
     last_up = False
+    dmx.clear_channels()
     while True:
         print("turning on" if not last_up else "turning off")
-        dmx.set_channel(0, 255 if not last_up else 0)
+        # dmx.set_channel(0, 255 if not last_up else 0)
         dmx.set_channel(1, 255 if not last_up else 0)
         dmx.set_channel(2, 255 if not last_up else 0)
         dmx.submit()
         last_up = not last_up
         time.sleep(1.0)
+        
+def test_dmx_addr():
+    dmx = Controller('/dev/ttyUSB0')  # Typical of Linux
+    last_up = False
+    dmx.clear_channels()
+    while True:
+      dmx.set_channel(35, 180)
+      dmx.submit()
+
 
 
 def test_touch():
@@ -118,4 +128,4 @@ def test_vlc():
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    test_neopixels()
+    test_dmx_addr()
