@@ -8,8 +8,9 @@ from src.types_ import RGB
 class CanState(Enum):
     ON = 1
     OFF = 2
-    WOOSH = 3
-    BOOSH = 4
+    SOLID = 3
+    WOOSH = 4
+    BOOSH = 5
 
 
 COLORS = [
@@ -58,10 +59,17 @@ class Cans:
         elif cls.state == CanState.OFF:
             cls.current_color.off()
             cls.write_all(cls.current_color)
+        elif cls.state == CanState.SOLID:
+            cls.run_solid()
         elif cls.state == CanState.WOOSH:
             cls.run_woosh()
         elif cls.state == CanState.BOOSH:
             cls.run_boosh()
+
+    @classmethod
+    def run_solid(cls):
+        color = COLORS[cls.woosh_position]
+        cls.write_all(color)
 
     @classmethod
     def run_boosh(cls):

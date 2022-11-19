@@ -96,6 +96,7 @@ class SelectingState:
             Buttons.select_numbered_button(selected_button)
             Cans.set_woosh(selected_button)
             if Video.is_playing():
+                Cans.transition_to_state(CanState.SOLID)
                 return DeconState.OUTRO
             else:
                 Cans.transition_to_state(CanState.WOOSH)
