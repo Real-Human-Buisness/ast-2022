@@ -54,7 +54,6 @@ class PlayingState:
 
     @classmethod
     def run(cls, millis: int) -> Optional[DeconState]:
-        Video.update()
         if not Video.is_playing():
             Dmx.set_channel(ADDR_PROJECTOR, 0)
             Buttons.set_state(4, ButtonState.FADE_OUT)
@@ -89,10 +88,8 @@ class SelectingState:
 
     @classmethod
     def run(cls, millis: int) -> Optional[DeconState]:
-        if Video.is_playing():
-            Video.update()
-            if not Video.is_playing():
-                Buttons.set_state(4, ButtonState.FADE_OUT)
+        if not Video.is_playing():
+            Buttons.set_state(4, ButtonState.FADE_OUT)
         selected_button = Buttons.get_numbered_push()
         if selected_button != -1:
             Buttons.select_numbered_button(selected_button)
@@ -105,7 +102,7 @@ class SelectingState:
     def exit(cls):
         print("selecting, leave")
         # just in case, stop video and projector
-        Video.stop_video()
+        # Video.stop_video()
         Buttons.set_state(4, ButtonState.FADE_OUT)
 
 

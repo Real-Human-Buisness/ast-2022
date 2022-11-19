@@ -32,6 +32,8 @@ class Decon:
         Buttons.update()
         Resetter.update()
         Cans.update()
+        if Video.is_playing():
+            Video.update()
 
     @classmethod
     def run(cls):

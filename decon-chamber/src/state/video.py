@@ -46,6 +46,7 @@ class Video:
                     cls.video_p = None
             Dmx.set_channel(ADDR_PROJECTOR, 0)
 
+
 if __name__ == '__main__':
     print("starting video")
     Video.start_video()
