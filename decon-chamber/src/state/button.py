@@ -137,6 +137,10 @@ class Buttons:
         return -1
 
     @classmethod
+    def get_main_state(cls) -> ButtonState:
+        return cls.main_button.state
+
+    @classmethod
     def set_state(cls, position: int, state: ButtonState):
         if position == 4:
             cls.main_button.transition_to_state(state)

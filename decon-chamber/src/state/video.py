@@ -8,6 +8,7 @@ from typing import Optional
 import psutil
 
 from src.base.dmx import Dmx, ADDR_PROJECTOR
+from src.state.button import ButtonState, Buttons
 
 
 class Video:
@@ -31,6 +32,10 @@ class Video:
                 cls.video_p = None
                 # stop projector
                 Dmx.set_channel(ADDR_PROJECTOR, 0)
+                if Buttons.get_main_state() == ButtonState.SOLID:
+                    Buttons.set_state(4, ButtonState.FADE_OUT)
+                else:
+                    Buttons.set_state(4, ButtonState.OFF)
 
     @classmethod
     def is_playing(cls):
@@ -45,6 +50,10 @@ class Video:
                     os.kill(proc.pid, signal.SIGTERM)
                     cls.video_p = None
             Dmx.set_channel(ADDR_PROJECTOR, 0)
+            if Buttons.get_main_state() == ButtonState.SOLID:
+                Buttons.set_state(4, ButtonState.FADE_OUT)
+            else:
+                Buttons.set_state(4, ButtonState.OFF)
 
 
 if __name__ == '__main__':
